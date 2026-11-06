@@ -18,7 +18,7 @@ A C++ console program that emulates how a school Guidance Counseling Office sche
 
 | # | Full Name (Surname, First Name M.I.) | Student No. | Role | Main Contributions |
 |---|---|---|---|---|
-| 1 | Cardenas, Lea Marie N. | 2420074 | Assistant Leader | Documentation, Core Scheduling Logic, Project Idea |
+| 1 | Cardenas, Lea Marie N. | 2420071 | Assistant Leader | Documentation, Core Scheduling Logic, Project Idea |
 | 2 | De Vera, Sophia D. | 2410229 | Project Leader | System Architecture, Project Idea, Documentation |
 | 3 | Hare, Andrei Angelo D. | 2012261 | QA | Program Testing, Repo Editor, Validator for both Documentation and Repo |
 | 4 | Pangyarihan, Jenny Rose | 2420070 | Assistant Code Developer | Console UI, System input validation |
