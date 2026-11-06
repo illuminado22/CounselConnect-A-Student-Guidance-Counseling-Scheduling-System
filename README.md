@@ -310,18 +310,72 @@ public:
 <summary><b>src/benchmark.cpp</b> (experimental timing)</summary>
 
 ```cpp
-// benchmark.cpp - experimental timing for Section 5 (book and cancel vs. input size n)
 #include <chrono>
+#include <iomanip>
+#include <iostream>
+#include <string>
 #include "scheduler.h"
+
 using namespace std::chrono;
 
 int main() {
     const int sizes[] = {100, 1000, 10000, 100000};
-    const int REPS = 5, OPS = 100;
-    cout << "n,book_ms,cancel_ms\n";
+    const int REPS = 5;
+    const int OPS = 100;
+
+    std::cout << std::fixed << std::setprecision(3);
+
+    std::cout << "+----------+--------------+--------------+\n"
+              << "| " << std::left
+              << std::setw(8) << "n" << " | "
+              << std::setw(12) << "Book (ms)" << " | "
+              << std::setw(12) << "Cancel (ms)" << " |\n"
+              << "+----------+--------------+--------------+\n";
+
     for (int n : sizes) {
-        double bookTotal = 0, cancelTotal = 0;
+        double bookTotal = 0;
+        double cancelTotal = 0;
+
         for (int rep = 0; rep < REPS; rep++) {
             Scheduler s;
-            string err;
-            // Preload n
+            std::string err;
+
+            for (int i = 0; i < n; i++) {
+                Request r{
+                    "S" + std::to_string(i),
+                    20000000 + i / 10,
+                    OPEN + (i % 10) * STEP,
+                    STEP
+                };
+                s.book(r, err);
+            }
+
+            auto t0 = steady_clock::now();
+            for (int j = 0; j < OPS; j++) {
+                Request r{
+                    "X" + std::to_string(j),
+                    30000000 + j,
+                    OPEN,
+                    STEP
+                };
+                s.book(r, err);
+            }
+            auto t1 = steady_clock::now();
+
+            for (int j = 0; j < OPS; j++) {
+                s.cancel(n - j);
+            }
+            auto t2 = steady_clock::now();
+
+            bookTotal += duration<double, milli>(t1 - t0).count();
+            cancelTotal += duration<double, milli>(t2 - t1).count();
+        }
+
+        std::cout << "| " << std::right
+                  << std::setw(8) << n << " | "
+                  << std::setw(12) << bookTotal / REPS << " | "
+                  << std::setw(12) << cancelTotal / REPS << " |\n";
+    }
+
+    std::cout << "+----------+--------------+--------------+\n";
+}
