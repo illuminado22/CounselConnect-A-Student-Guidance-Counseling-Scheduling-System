@@ -87,12 +87,13 @@ git clone https://github.com/[username]/CounselConnect-A-Student-Guidance-Counse
 cd CounselConnect-A-Student-Guidance-Counseling-Scheduling-System
 
 # Build and run the program
-g++ -std=c++17 -O2 src/main.cpp -o counselconnect
-./counselconnect
+g++ -g main.cpp -o main.exe
+./main.exe
 
 # Build and run the benchmark
-g++ -std=c++17 -O2 src/benchmark.cpp -o benchmark
-./benchmark
+g++ -g benchmark.cpp -o benchmark.exe
+./benchmark.exe
+
 ```
 
 On Windows, run `counselconnect.exe` and `benchmark.exe` instead.
