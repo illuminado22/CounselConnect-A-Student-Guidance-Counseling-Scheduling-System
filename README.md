@@ -4,7 +4,7 @@ A C++ console program that emulates how a school Guidance Counseling Office sche
 
 ![C++17](https://img.shields.io/badge/C%2B%2B-17-blue) ![Platform](https://img.shields.io/badge/app-console-lightgrey) ![Course](https://img.shields.io/badge/course-CPE%20010-green)
 
-## Course 
+## Course Information
 
 | Item | Details |
 |---|---|
